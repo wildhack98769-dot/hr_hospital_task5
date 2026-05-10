@@ -41,6 +41,12 @@ class HospitalDoctor(models.Model):
         string='Interns',
     )
 
+    visit_ids = fields.One2many(
+        comodel_name='hr.hospital.visit',
+        inverse_name='doctor_id',
+        string='Visits',
+    )
+
     @api.depends('category_id')
     def _compute_is_intern(self):
         for rec in self:
@@ -58,3 +64,32 @@ class HospitalDoctor(models.Model):
             else:
                 if rec.mentor_id:
                     raise ValidationError(self.env._('Only interns can have a mentor.'))
+
+    def _get_report_visit_history(self):
+        self.ensure_one()
+        return self.visit_ids.sorted(lambda visit: (visit.planned_date, visit.id), reverse=True)
+
+    def _get_report_patient_rows(self):
+        self.ensure_one()
+        rows = []
+        seen_patient_ids = set()
+        for visit in self._get_report_visit_history():
+            patient = visit.patient_id
+            if not patient or patient.id in seen_patient_ids:
+                continue
+            seen_patient_ids.add(patient.id)
+            rows.append(
+                {
+                    'patient': patient,
+                    'gender_label': dict(patient._fields['gender'].selection).get(patient.gender, ''),
+                    'date_of_birth': patient.date_of_birth,
+                    'phone': patient.phone,
+                    'status': visit.state,
+                    'status_label': dict(self.env['hr.hospital.visit']._fields['state'].selection).get(visit.state, ''),
+                    'visit_date': visit.planned_date,
+                }
+            )
+        return rows
+
+    def _get_report_print_datetime(self):
+        return fields.Datetime.now().strftime('%Y-%m-%d %H:%M')

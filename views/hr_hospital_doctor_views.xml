@@ -6,6 +6,7 @@
 	        <field name="model">hr.hospital.doctor</field>
 	        <field name="arch" type="xml">
 	            <list decoration-info="is_intern" sample="1">
+	                <field name="photo" widget="image" class="oe_avatar" options="{'size': [32, 32]}"/>
 	                <field name="name"/>
 	                <field name="specialization"/>
 	                <field name="category_id" widget="badge" decoration-success="category_id"/>
@@ -35,9 +36,19 @@
 	                <field name="is_intern"/>
 	                <field name="photo"/>
                 <field name="specialization"/>
+                <field name="intern_ids"/>
 	                <templates>
 	                    <t t-name="card">
-	                        <div t-attf-class="o_hospital_kanban_card oe_kanban_global_click shadow-sm border-0 rounded d-flex flex-column align-items-center text-center">
+	                        <div t-attf-class="o_hospital_kanban_card oe_kanban_global_click shadow-sm border-0 rounded d-flex flex-column align-items-center text-center position-relative">
+                                <div class="o_dropdown_kanban dropdown position-absolute top-0 end-0 m-2">
+                                    <a class="dropdown-toggle btn btn-light btn-sm border-0 shadow-none" role="button" data-bs-toggle="dropdown" href="#" aria-label="Kanban menu">
+                                        <i class="fa fa-ellipsis-v"/>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <a class="dropdown-item" type="open">Edit</a>
+                                        <a class="dropdown-item text-danger" type="delete">Delete</a>
+                                    </div>
+                                </div>
 	                            <div class="o_hospital_kanban_card_image o_kanban_image_full">
 	                                <field name="photo" widget="image" options="{'preview_image': 'photo'}" class="w-100 h-100"/>
 	                            </div>
@@ -51,6 +62,12 @@
                                 </div>
                                 <div class="o_hospital_kanban_meta text-muted small mt-2">
                                     <i class="fa fa-stethoscope me-1"/> <field name="specialization"/>
+                                </div>
+                                <div t-if="record.intern_ids.raw_value and record.intern_ids.raw_value.length" class="o_hospital_kanban_interns mt-2 w-100">
+                                    <div class="small fw-bold text-muted mb-1">Interns</div>
+                                    <div class="small">
+                                        <field name="intern_ids"/>
+                                    </div>
                                 </div>
                                 <div class="mt-3 w-100">
                                     <button name="%(action_hr_hospital_visit_create_quick_doctor)d"
@@ -73,6 +90,8 @@
         <field name="arch" type="xml">
             <form>
                 <header>
+                    <button name="%(hr_hospital.action_hr_hospital_doctor_report_pdf)d"
+                            string="Doctor Report (PDF)" type="action" class="btn-secondary"/>
                     <button name="%(hr_hospital.action_disease_report_wizard_binding)d"
                             string="Disease Report (PDF)" type="action" class="btn-secondary"/>
                     <button name="%(hr_hospital.action_hr_hospital_disease_month_report_wizard)d"

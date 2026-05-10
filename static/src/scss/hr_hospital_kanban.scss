@@ -13,6 +13,17 @@
         overflow: hidden;
     }
 
+    .o_hospital_kanban_card .o_dropdown_kanban {
+        visibility: visible;
+        opacity: 0.45;
+        z-index: 2;
+    }
+
+    .o_hospital_kanban_card:hover .o_dropdown_kanban,
+    .o_hospital_kanban_card .o_dropdown_kanban.show {
+        opacity: 1;
+    }
+
     .o_hospital_kanban_card_image {
         width: 88px;
         height: 88px;
@@ -42,6 +53,10 @@
     .o_hospital_kanban_meta {
         line-height: 1.25;
         min-height: 1.25em;
+    }
+
+    .o_hospital_kanban_interns {
+        line-height: 1.25;
     }
 
     .o_hospital_kanban_badge_placeholder {

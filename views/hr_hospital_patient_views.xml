@@ -46,7 +46,7 @@
             <field name="model">hr.hospital.patient</field>
             <field name="arch" type="xml">
                 <list sample="1">
-                    <field name="avatar_128" widget="image" class="oe_avatar" options="{'size': [32, 32]}"/>
+                    <field name="photo" widget="image" class="oe_avatar" options="{'size': [32, 32]}"/>
                     <field name="name"/>
                     <field name="date_of_birth" optional="show"/>
                     <field name="age" optional="show"/>
@@ -137,7 +137,7 @@
         <record id="action_hr_hospital_patient" model="ir.actions.act_window">
             <field name="name">Patients</field>
             <field name="res_model">hr.hospital.patient</field>
-            <field name="view_mode">list,kanban,form</field>
+            <field name="view_mode">kanban,list,form</field>
             <field name="search_view_id" ref="view_hr_hospital_patient_search"/>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">

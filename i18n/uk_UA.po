@@ -31,6 +31,21 @@ msgid "<i class=\"fa fa-calendar-plus-o me-1\"/> Quick Visit"
 msgstr "<i class=\"fa fa-calendar-plus-o me-1\"/> Швидкий візит"
 
 #. module: hr_hospital
+#: model_terms:ir.ui.view,arch_db:hr_hospital.view_hr_hospital_doctor_kanban
+msgid "Kanban menu"
+msgstr "Меню канбану"
+
+#. module: hr_hospital
+#: model_terms:ir.ui.view,arch_db:hr_hospital.view_hr_hospital_doctor_kanban
+msgid "Edit"
+msgstr "Редагувати"
+
+#. module: hr_hospital
+#: model_terms:ir.ui.view,arch_db:hr_hospital.view_hr_hospital_doctor_kanban
+msgid "Delete"
+msgstr "Видалити"
+
+#. module: hr_hospital
 #: model_terms:ir.ui.view,arch_db:hr_hospital.view_hr_hospital_patient_kanban
 msgid "<i class=\"fa fa-phone me-1\"/> Call"
 msgstr "<i class=\"fa fa-phone me-1\"/> Зателефонувати"
@@ -371,6 +386,12 @@ msgid "Disease Statistics Report (PDF Preview)"
 msgstr "Статистичний звіт по хворобах (PDF перегляд)"
 
 #. module: hr_hospital
+#: model:ir.actions.report,name:hr_hospital.action_hr_hospital_doctor_report_pdf
+#: model_terms:ir.ui.view,arch_db:hr_hospital.view_hr_hospital_doctor_form
+msgid "Doctor Report (PDF)"
+msgstr "Звіт лікаря (PDF)"
+
+#. module: hr_hospital
 #: model:ir.model,name:hr_hospital.model_hr_hospital_disease
 msgid "Disease Type"
 msgstr "Тип хвороби"
@@ -604,6 +625,16 @@ msgstr "Майстер звіту по хворобах"
 #: model:ir.model,name:hr_hospital.model_hr_hospital_disease_report
 msgid "Hospital Disease Report Wizard"
 msgstr "Майстер звіту по хворобах"
+
+#. module: hr_hospital
+#: model_terms:ir.ui.view,arch_db:hr_hospital.hr_hospital_doctor_report_template
+msgid "Printed at:"
+msgstr "Надруковано:"
+
+#. module: hr_hospital
+#: model_terms:ir.ui.view,arch_db:hr_hospital.hr_hospital_doctor_report_template
+msgid "City:"
+msgstr "Місто:"
 
 #. module: hr_hospital
 #: model:ir.model,name:hr_hospital.model_hr_hospital_doctor
@@ -1159,6 +1190,7 @@ msgstr "Аналіз візитів"
 
 #. module: hr_hospital
 #: model_terms:ir.ui.view,arch_db:hr_hospital.view_hr_hospital_dashboard_form
+#: model:ir.ui.menu,name:hr_hospital.menu_hr_hospital_visits_list
 msgid "Visits Log"
 msgstr "Журнал візитів"
 

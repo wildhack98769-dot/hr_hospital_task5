@@ -49,7 +49,6 @@
                                 class="btn-secondary" invisible="state == 'cancelled'"/>
                         <button name="action_planned" string="Planned" type="object"
                                 class="btn-primary" invisible="state != 'cancelled'"/>
-
                         <button name="%(hr_hospital.action_disease_report_wizard_binding)d"
                                 string="Disease Report (PDF)" type="action" class="oe_highlight"/>
                         <button name="%(hr_hospital.action_visit_report_wizard)d"
@@ -59,7 +58,10 @@
                     </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box">
-                            <button name="action_open_same_disease_visits" type="object" class="oe_stat_button" icon="fa-history" invisible="not disease_id">
+                            <button name="action_open_same_disease_visits"
+                                    type="object" class="oe_stat_button"
+                                    icon="fa-history"
+                                    invisible="not disease_id">
                                 <field name="same_disease_visit_count" widget="statinfo" string="Similar Cases"/>
                             </button>
                         </div>

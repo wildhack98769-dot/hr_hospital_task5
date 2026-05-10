@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="hr_hospital_doctor_report_template">
+        <t t-call="web.html_container">
+            <meta charset="utf-8"/>
+            <t t-foreach="docs" t-as="doctor">
+                <t t-set="company" t-value="doctor.env.company"/>
+                <div class="page o_hr_hospital_doctor_report">
+                    <style>
+                        .o_hr_hospital_doctor_report { font-size: 12px; }
+                        .o_hr_hospital_report_header { display: flex; gap: 16px; align-items: center; margin-bottom: 18px; }
+                        .o_hr_hospital_report_logo { width: 64px; height: 64px; object-fit: contain; }
+                        .o_hr_hospital_report_company { line-height: 1.35; }
+                        .o_hr_hospital_report_title { margin: 12px 0 16px; font-size: 22px; font-weight: 700; }
+                        .o_hr_hospital_section_title { font-size: 15px; font-weight: 700; margin: 16px 0 8px; }
+                        .o_hr_hospital_table { width: 100%; border-collapse: collapse; }
+                        .o_hr_hospital_table th, .o_hr_hospital_table td { border: 1px solid #d9d9d9; padding: 6px 8px; vertical-align: top; }
+                        .o_hr_hospital_table thead th { background: #f3f4f6; }
+                        .o_hr_hospital_badge { display: inline-block; padding: 3px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; }
+                        .o_hr_hospital_badge_planned { background: #fef3c7; color: #92400e; }
+                        .o_hr_hospital_badge_done { background: #dcfce7; color: #166534; }
+                        .o_hr_hospital_badge_cancelled { background: #fee2e2; color: #991b1b; }
+                        .o_hr_hospital_footer { position: fixed; left: 0; right: 0; bottom: 8px; font-size: 10px; color: #6b7280; }
+                    </style>
+
+                    <div class="o_hr_hospital_report_header">
+                        <div>
+                            <t t-if="company.logo">
+                                <img t-att-src="image_data_uri(company.logo)" class="o_hr_hospital_report_logo" alt="Logo"/>
+                            </t>
+                        </div>
+                        <div class="o_hr_hospital_report_company">
+                            <div class="fw-bold"><t t-esc="company.name"/></div>
+                            <div t-if="company.phone"><t t-esc="company.phone"/></div>
+                            <div t-if="company.email"><t t-esc="company.email"/></div>
+                            <div t-if="company.website"><t t-esc="company.website"/></div>
+                        </div>
+                    </div>
+
+                    <div class="o_hr_hospital_report_title">
+                        <t t-esc="doctor.name"/> - <t t-esc="doctor.specialization or ''"/>
+                    </div>
+
+                    <div class="o_hr_hospital_section_title">Visit History</div>
+                    <table class="o_hr_hospital_table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Patient</th>
+                                <th>Disease</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="doctor._get_report_visit_history()" t-as="visit">
+                                <tr>
+                                    <td><span t-field="visit.planned_date"/></td>
+                                    <td><span t-field="visit.patient_id"/></td>
+                                    <td><span t-field="visit.disease_id"/></td>
+                                    <td>
+                                        <span t-att-class="'o_hr_hospital_badge ' + ('o_hr_hospital_badge_planned' if visit.state == 'planned' else 'o_hr_hospital_badge_done' if visit.state == 'done' else 'o_hr_hospital_badge_cancelled')">
+                                            <t t-esc="dict(visit._fields['state'].selection).get(visit.state, visit.state)"/>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+
+                    <div class="o_hr_hospital_section_title">Patients</div>
+                    <table class="o_hr_hospital_table">
+                        <thead>
+                            <tr>
+                                <th>Patient</th>
+                                <th>Gender</th>
+                                <th>Date of Birth</th>
+                                <th>Phone</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="doctor._get_report_patient_rows()" t-as="row">
+                                <tr>
+                                    <td><t t-esc="row['patient'].name"/></td>
+                                    <td><t t-esc="row['gender_label']"/></td>
+                                    <td><t t-esc="row['date_of_birth'] or ''"/></td>
+                                    <td><t t-esc="row['phone'] or ''"/></td>
+                                    <td>
+                                        <span t-att-class="'o_hr_hospital_badge ' + ('o_hr_hospital_badge_planned' if row['status'] == 'planned' else 'o_hr_hospital_badge_done' if row['status'] == 'done' else 'o_hr_hospital_badge_cancelled')">
+                                            <t t-esc="row['status_label']"/>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+
+                    <div class="o_hr_hospital_footer">
+                        <div class="d-flex justify-content-between">
+                            <span>
+                                Printed at: <t t-esc="doctor._get_report_print_datetime()"/>
+                            </span>
+                            <span t-if="company.partner_id.city">
+                                City: <t t-esc="company.partner_id.city"/>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

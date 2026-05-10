@@ -22,14 +22,19 @@
         <menuitem id="menu_hr_hospital_visits"
                   name="Visits"
                   parent="menu_hr_hospital_root"
-                  action="action_hr_hospital_visit"
                   sequence="30"/>
+
+        <menuitem id="menu_hr_hospital_visits_list"
+                  name="Visits Log"
+                  parent="menu_hr_hospital_visits"
+                  action="action_hr_hospital_visit"
+                  sequence="10"/>
 
         <menuitem id="menu_hr_hospital_visits_analysis"
                   name="Visits Analysis"
                   parent="menu_hr_hospital_visits"
                   action="action_hr_hospital_visit_analysis"
-                  sequence="40"/>
+                  sequence="20"/>
 
         <menuitem id="menu_hr_hospital_config"
                   name="Configuration"
