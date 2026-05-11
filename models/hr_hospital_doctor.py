@@ -47,6 +47,10 @@ class HospitalDoctor(models.Model):
         string='Visits',
     )
 
+    color = fields.Integer(
+        string='Color',
+    )
+
     @api.depends('category_id')
     def _compute_is_intern(self):
         for rec in self:

@@ -31,25 +31,22 @@
 	        <field name="name">hr.hospital.doctor.kanban</field>
 	        <field name="model">hr.hospital.doctor</field>
 	        <field name="arch" type="xml">
-            <kanban default_group_by="category_id" class="o_kanban_small_column o_hospital_kanban_view" sample="1">
+            <kanban highlight_color="color" default_group_by="category_id" class="o_kanban_small_column o_hospital_kanban_view" sample="1">
                 <field name="name"/>
 	                <field name="is_intern"/>
 	                <field name="photo"/>
                 <field name="specialization"/>
                 <field name="intern_ids"/>
 	                <templates>
+                         <t t-name="menu">
+                            <t t-if="widget.editable"><a role="menuitem" type="open" class="dropdown-item">Edit</a></t>
+                            <t t-if="widget.deletable"><a role="menuitem" type="delete" class="dropdown-item">Delete</a></t>
+                            <div role="separator" class="dropdown-divider"></div>
+                            <field name="color" widget="kanban_color_picker"/>
+                        </t>
 	                    <t t-name="card">
 	                        <div t-attf-class="o_hospital_kanban_card oe_kanban_global_click shadow-sm border-0 rounded d-flex flex-column align-items-center text-center position-relative">
-                                <div class="o_dropdown_kanban dropdown position-absolute top-0 end-0 m-2">
-                                    <a class="dropdown-toggle btn btn-light btn-sm border-0 shadow-none" role="button" data-bs-toggle="dropdown" href="#" aria-label="Kanban menu">
-                                        <i class="fa fa-ellipsis-v"/>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-end">
-                                        <a class="dropdown-item" type="open">Edit</a>
-                                        <a class="dropdown-item text-danger" type="delete">Delete</a>
-                                    </div>
-                                </div>
-	                            <div class="o_hospital_kanban_card_image o_kanban_image_full">
+                                <div class="o_hospital_kanban_card_image o_kanban_image_full">
 	                                <field name="photo" widget="image" options="{'preview_image': 'photo'}" class="w-100 h-100"/>
 	                            </div>
                             <div class="o_hospital_kanban_card_body px-3 pb-3 pt-2 d-flex flex-column align-items-center">

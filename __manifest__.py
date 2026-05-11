@@ -5,7 +5,10 @@
     "summary": "Comprehensive hospital management system",
     "author": "Evgen Cerkun",
     "license": "LGPL-3",
-    "depends": ["base"],
+    "depends": [
+                "base",
+                "hr",
+                ],
     "data": [
         "security/ir.model.access.csv",
         "wizard/hr_hospital_disease_report_template.xml",
@@ -39,7 +42,6 @@
     "images": ["static/description/icon.png"],
     "assets": {
         "web.assets_backend": [
-            "hr_hospital/static/src/dashboard/**/*.js",
             "hr_hospital/static/src/scss/hr_hospital_kanban.scss",
         ]
     },
