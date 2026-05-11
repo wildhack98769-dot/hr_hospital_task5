@@ -6,6 +6,7 @@
             <field name="patient_id" ref="patient_thirteen"/>
             <field name="doctor_id" ref="doctor_mentor_gregory_house"/>
             <field name="appointment_date" eval="datetime.now().strftime('%Y-%m-%d')"/>
+            <field name="change_date" eval="(datetime.now() + relativedelta(days=1)).strftime('%Y-%m-%d')"/>
             <field name="active">True</field>
         </record>
 
@@ -13,6 +14,7 @@
             <field name="patient_id" ref="patient_thirteen"/>
             <field name="doctor_id" ref="doctor_intern_allison_cameron"/>
             <field name="appointment_date" eval="datetime.now().strftime('%Y-%m-%d')"/>
+            <field name="change_date" eval="(datetime.now() + relativedelta(days=2)).strftime('%Y-%m-%d')"/>
             <field name="active">True</field>
         </record>
 
@@ -20,6 +22,7 @@
             <field name="patient_id" ref="patient_thirteen"/>
             <field name="doctor_id" ref="doctor_cuddy"/>
             <field name="appointment_date" eval="datetime.now().strftime('%Y-%m-%d')"/>
+            <field name="change_date" eval="(datetime.now() + relativedelta(days=3)).strftime('%Y-%m-%d')"/>
             <field name="active">True</field>
         </record>
 

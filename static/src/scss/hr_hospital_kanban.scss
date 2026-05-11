@@ -64,3 +64,100 @@
         height: 24px;
     }
 }
+
+.o_kanban_view.o_hospital_disease_kanban_view {
+    .o_kanban_renderer {
+        gap: 12px;
+        align-content: flex-start;
+    }
+
+    .o_kanban_record {
+        display: flex;
+    }
+
+    .o_hospital_kanban_card {
+        width: 100%;
+        min-height: 164px;
+        padding: 12px;
+        gap: 8px;
+        overflow: hidden;
+    }
+
+    .o_hospital_disease_kanban_icon {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background: #f8f9fa;
+        font-size: 2rem;
+        flex: 0 0 auto;
+    }
+}
+
+@media (max-width: 1199.98px) {
+    .o_component_with_search_panel,
+    .o_controller_with_searchpanel {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+
+        > .o_search_panel_sidebar,
+        > .o_search_panel {
+            width: 100% !important;
+            min-height: 0;
+            height: auto;
+        }
+
+        > .o_search_panel_sidebar {
+            writing-mode: horizontal-tb !important;
+            text-orientation: initial !important;
+            width: 100% !important;
+            height: 3.5rem !important;
+            max-height: 3.5rem !important;
+            min-height: 3.5rem !important;
+            padding: 0.25rem 0.5rem !important;
+            overflow: hidden !important;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            border-right: 0 !important;
+            border-bottom: var(--border-width, 1px) solid var(--border-color, #dee2e6) !important;
+        }
+
+        > .o_search_panel_sidebar .o_search_panel_current_selection {
+            writing-mode: horizontal-tb !important;
+            text-orientation: initial !important;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: calc(100% - 2.75rem);
+        }
+
+        .o_search_panel {
+            width: 100% !important;
+            max-height: 34vh;
+            padding-bottom: 0 !important;
+            border-right: 0;
+            border-bottom: var(--border-width, 1px) solid var(--border-color, #dee2e6);
+        }
+
+        .o_search_panel_resize {
+            display: none;
+        }
+
+        .o_search_panel {
+            overflow-y: auto;
+        }
+
+        .o_search_panel_sidebar + .o_renderer,
+        .o_search_panel_sidebar + .o_renderer_with_searchpanel,
+        .o_search_panel + .o_renderer,
+        .o_search_panel + .o_renderer_with_searchpanel {
+            margin-top: 0;
+        }
+
+        .o_renderer,
+        .o_renderer_with_searchpanel {
+            width: 100%;
+        }
+    }
+}
