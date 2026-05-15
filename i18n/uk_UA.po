@@ -896,6 +896,21 @@ msgid "Patient"
 msgstr "Пацієнт"
 
 #. module: hr_hospital
+#: model:res.groups,name:hr_hospital.group_hospital_manager
+msgid "Manager"
+msgstr "Менеджер"
+
+#. module: hr_hospital
+#: model:res.groups,name:hr_hospital.group_hospital_admin
+msgid "Administrator"
+msgstr "Адміністратор"
+
+#. module: hr_hospital
+#: model:ir.model.fields,field_description:hr_hospital.field_hr_hospital_patient__user_id
+msgid "User"
+msgstr "Користувач"
+
+#. module: hr_hospital
 #: model:ir.model.fields,field_description:hr_hospital.field_hr_hospital_dashboard__patient_count
 msgid "Patient Count"
 msgstr "Кількість пацієнтів"
@@ -1231,6 +1246,11 @@ msgstr "Ви не можете видалити завершений візит.
 #: code:addons/hr_hospital/models/hr_hospital_visit.py:0
 msgid "You cannot set a completed visit to planned."
 msgstr "Ви не можете перевести завершений візит у запланований."
+
+#. module: hr_hospital
+#: code:addons/hr_hospital/models/hr_hospital_dashboard.py:0
+msgid "You do not have access to this dashboard action."
+msgstr "У вас немає доступу до цієї дії на дашборді."
 
 #. module: hr_hospital
 #: model_terms:ir.ui.view,arch_db:hr_hospital.view_hr_hospital_patient_form

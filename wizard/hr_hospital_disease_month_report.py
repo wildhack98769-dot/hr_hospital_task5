@@ -4,14 +4,18 @@ from odoo import fields, models
 
 
 class HospitalDiseaseMonthReport(models.TransientModel):
+    """Wizard that opens a grouped monthly disease analysis view."""
+
     _name = 'hr.hospital.disease.month.report'
     _description = 'Hospital Disease Month Report Wizard'
 
     def _default_date_from(self):
+        """Return the first day of the current month."""
         today = fields.Date.context_today(self)
         return today.replace(day=1)
 
     def _default_date_to(self):
+        """Return the last day of the current month."""
         today = fields.Date.context_today(self)
         start = today.replace(day=1)
         return start + relativedelta(months=1, days=-1)
@@ -22,6 +26,7 @@ class HospitalDiseaseMonthReport(models.TransientModel):
     disease_ids = fields.Many2many('hr.hospital.disease', string='Diseases', domain=[('is_group', '=', False)])
 
     def action_generate_report(self):
+        """Open the visit list grouped by disease for the selected period."""
         self.ensure_one()
         domain = [
             ('planned_date', '>=', self.date_from),

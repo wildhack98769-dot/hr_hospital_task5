@@ -9,6 +9,11 @@ class HospitalPatient(models.Model):
     _inherit = ['hr.hospital.medic.info']
 
     name = fields.Char(string='Full Name', required=True)
+    user_id = fields.Many2one(
+        comodel_name='res.users',
+        string='User',
+        help='Links the patient to the Odoo user account that can see their visits.',
+    )
     date_of_birth = fields.Date(string='Date of Birth')
     gender = fields.Selection(
         selection=[

@@ -3,6 +3,8 @@ from odoo.exceptions import ValidationError
 
 
 class HospitalDoctor(models.Model):
+    """Doctor profile with qualification, mentoring and reporting helpers."""
+
     _name = 'hr.hospital.doctor'
     _description = 'Hospital Doctor'
 
@@ -53,11 +55,13 @@ class HospitalDoctor(models.Model):
 
     @api.depends('category_id')
     def _compute_is_intern(self):
+        """Mark a doctor as an intern when their category is flagged as such."""
         for rec in self:
             rec.is_intern = rec.category_id.is_intern_category if rec.category_id else False
 
     @api.constrains('mentor_id', 'is_intern')
     def _check_mentor_intern_status(self):
+        """Prevent invalid mentor links for intern and non-intern doctors."""
         for rec in self:
             if rec.is_intern:
                 if rec.mentor_id:
@@ -69,11 +73,22 @@ class HospitalDoctor(models.Model):
                 if rec.mentor_id:
                     raise ValidationError(self.env._('Only interns can have a mentor.'))
 
+    def action_create_quick_visit(self):
+        """Open a new visit form prefilled with the current doctor."""
+        self.ensure_one()
+        action = self.env.ref('hr_hospital.action_hr_hospital_visit').read()[0]
+        action['views'] = [(self.env.ref('hr_hospital.view_hr_hospital_visit_form').id, 'form')]
+        action['target'] = 'new'
+        action['context'] = dict(self.env.context, default_doctor_id=self.id)
+        return action
+
     def _get_report_visit_history(self):
+        """Return the doctor's visits ordered from newest to oldest."""
         self.ensure_one()
         return self.visit_ids.sorted(lambda visit: (visit.planned_date, visit.id), reverse=True)
 
     def _get_report_patient_rows(self):
+        """Build unique patient rows for the printed doctor report."""
         self.ensure_one()
         rows = []
         seen_patient_ids = set()
@@ -96,4 +111,5 @@ class HospitalDoctor(models.Model):
         return rows
 
     def _get_report_print_datetime(self):
+        """Return the current timestamp for the printed doctor report."""
         return fields.Datetime.now().strftime('%Y-%m-%d %H:%M')

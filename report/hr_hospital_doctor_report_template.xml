@@ -3,25 +3,25 @@
     <template id="hr_hospital_doctor_report_template">
         <t t-call="web.html_container">
             <meta charset="utf-8"/>
+            <style>
+                .o_hr_hospital_doctor_report { font-size: 12px; }
+                .o_hr_hospital_report_header { display: flex; gap: 16px; align-items: center; margin-bottom: 18px; }
+                .o_hr_hospital_report_logo { width: 64px; height: 64px; object-fit: contain; }
+                .o_hr_hospital_report_company { line-height: 1.35; }
+                .o_hr_hospital_report_title { margin: 12px 0 16px; font-size: 22px; font-weight: 700; }
+                .o_hr_hospital_section_title { font-size: 15px; font-weight: 700; margin: 16px 0 8px; }
+                .o_hr_hospital_table { width: 100%; border-collapse: collapse; }
+                .o_hr_hospital_table th, .o_hr_hospital_table td { border: 1px solid #d9d9d9; padding: 6px 8px; vertical-align: top; }
+                .o_hr_hospital_table thead th { background: #f3f4f6; }
+                .o_hr_hospital_badge { display: inline-block; padding: 3px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; }
+                .o_hr_hospital_badge_planned { background: #fef3c7; color: #92400e; }
+                .o_hr_hospital_badge_done { background: #dcfce7; color: #166534; }
+                .o_hr_hospital_badge_cancelled { background: #fee2e2; color: #991b1b; }
+                .o_hr_hospital_footer { position: fixed; left: 0; right: 0; bottom: 8px; font-size: 10px; color: #6b7280; }
+            </style>
             <t t-foreach="docs" t-as="doctor">
                 <t t-set="company" t-value="doctor.env.company"/>
                 <div class="page o_hr_hospital_doctor_report">
-                    <style>
-                        .o_hr_hospital_doctor_report { font-size: 12px; }
-                        .o_hr_hospital_report_header { display: flex; gap: 16px; align-items: center; margin-bottom: 18px; }
-                        .o_hr_hospital_report_logo { width: 64px; height: 64px; object-fit: contain; }
-                        .o_hr_hospital_report_company { line-height: 1.35; }
-                        .o_hr_hospital_report_title { margin: 12px 0 16px; font-size: 22px; font-weight: 700; }
-                        .o_hr_hospital_section_title { font-size: 15px; font-weight: 700; margin: 16px 0 8px; }
-                        .o_hr_hospital_table { width: 100%; border-collapse: collapse; }
-                        .o_hr_hospital_table th, .o_hr_hospital_table td { border: 1px solid #d9d9d9; padding: 6px 8px; vertical-align: top; }
-                        .o_hr_hospital_table thead th { background: #f3f4f6; }
-                        .o_hr_hospital_badge { display: inline-block; padding: 3px 8px; border-radius: 999px; font-size: 11px; font-weight: 700; }
-                        .o_hr_hospital_badge_planned { background: #fef3c7; color: #92400e; }
-                        .o_hr_hospital_badge_done { background: #dcfce7; color: #166534; }
-                        .o_hr_hospital_badge_cancelled { background: #fee2e2; color: #991b1b; }
-                        .o_hr_hospital_footer { position: fixed; left: 0; right: 0; bottom: 8px; font-size: 10px; color: #6b7280; }
-                    </style>
 
                     <div class="o_hr_hospital_report_header">
                         <div>

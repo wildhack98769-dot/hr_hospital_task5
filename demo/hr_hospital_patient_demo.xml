@@ -3,6 +3,7 @@
     <data noupdate="1">
         <record id="patient_1" model="hr.hospital.patient">
             <field name="name">Remy 'Thirteen' Hadley</field>
+            <field name="user_id" ref="demo_user_patient"/>
             <field name="date_of_birth">1984-09-22</field>
             <field name="gender">female</field>
             <field name="phone">+1555000201</field>
@@ -16,6 +17,7 @@
 
         <record id="patient_thirteen" model="hr.hospital.patient">
             <field name="name">Remy 'Thirteen' Hadley (History Track)</field>
+            <field name="user_id" ref="demo_user_patient"/>
             <field name="date_of_birth">1984-09-22</field>
             <field name="gender">female</field>
             <field name="phone">+1555000201</field>

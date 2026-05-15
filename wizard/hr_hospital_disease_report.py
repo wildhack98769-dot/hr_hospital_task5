@@ -5,14 +5,18 @@ from odoo.exceptions import UserError
 
 
 class HospitalDiseaseReport(models.TransientModel):
+    """Wizard that generates the disease statistics PDF report."""
+
     _name = 'hr.hospital.disease.report'
     _description = 'Hospital Disease Report Wizard'
 
     def _default_start_date(self):
+        """Return the first day of the current month."""
         today = fields.Date.context_today(self)
         return today.replace(day=1)
 
     def _default_end_date(self):
+        """Return the last day of the current month."""
         today = fields.Date.context_today(self)
         start = today.replace(day=1)
         next_month = start + relativedelta(months=1)
@@ -28,6 +32,7 @@ class HospitalDiseaseReport(models.TransientModel):
     )
 
     def _get_records(self):
+        """Fetch visits matching the current report filters."""
         self.ensure_one()
         domain = [
             ('planned_date', '>=', self.start_date),
@@ -40,6 +45,7 @@ class HospitalDiseaseReport(models.TransientModel):
         return self.env['hr.hospital.visit'].search(domain, order='disease_id, planned_date, id')
 
     def action_generate_report(self):
+        """Generate the PDF report for the selected visits."""
         self.ensure_one()
         records = self._get_records()
         if not records:

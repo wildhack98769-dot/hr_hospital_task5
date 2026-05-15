@@ -13,6 +13,7 @@
 
         <record id="doctor_mentor_gregory_house" model="hr.hospital.doctor">
             <field name="name">Dr. Gregory House</field>
+            <field name="user_id" ref="demo_user_doctor"/>
             <field name="specialization">Diagnostic Medicine</field>
             <field name="category_id" ref="doctor_category_general_practitioner"/>
             <field name="date_of_birth">1959-06-11</field>
@@ -26,6 +27,7 @@
 
         <record id="doctor_intern_allison_cameron" model="hr.hospital.doctor">
             <field name="name">Dr. Allison Cameron</field>
+            <field name="user_id" ref="demo_user_intern"/>
             <field name="specialization">Immunology</field>
             <field name="category_id" ref="doctor_category_intern"/>
             <field name="date_of_birth">1981-03-21</field>

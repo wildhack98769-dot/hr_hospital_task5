@@ -50,11 +50,13 @@ class HospitalDisease(models.Model):
 
     @api.constrains('parent_id')
     def _check_disease_recursion(self):
+        """Prevent recursive disease hierarchies."""
         if not self._check_recursion():
             raise ValidationError('Error! You cannot create recursive hierarchies.')
 
     @api.depends('name', 'parent_id.display_name')
     def _compute_display_name(self):
+        """Build a hierarchical display name for the disease tree."""
         for rec in self:
             if rec.parent_id:
                 rec.display_name = f'{rec.parent_id.display_name} / {rec.name}'

@@ -82,6 +82,7 @@
 
                         <group>
                             <group string="Medical Data" name="medical_data">
+                                <field name="user_id" widget="many2one_avatar_user" options="{'no_create': True}"/>
                                 <field name="date_of_birth"/>
                                 <field name="age" class="fw-bold"/>
                                 <label for="blood_group" string="Blood Details"/>

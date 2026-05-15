@@ -2,6 +2,8 @@ from odoo import _, api, fields, models
 
 
 class HospitalDoctorHistory(models.Model):
+    """Historical record of doctor assignment changes for patients."""
+
     _name = 'hr.hospital.doctor.history'
     _description = 'Doctor Appointment History'
 
@@ -25,6 +27,7 @@ class HospitalDoctorHistory(models.Model):
 
     @api.onchange('appointment_date', 'change_date')
     def _onchange_dates(self):
+        """Warn when the reassignment date is earlier than the appointment date."""
         if self.appointment_date and self.change_date:
             if self.change_date < self.appointment_date:
                 return {
@@ -37,6 +40,7 @@ class HospitalDoctorHistory(models.Model):
 
     @api.depends('patient_id', 'doctor_id', 'appointment_date')
     def _compute_display_name(self):
+        """Compose a human-readable label for doctor history entries."""
         for rec in self:
             patient_name = rec.patient_id.display_name or _('Unknown Patient')
             doctor_name = rec.doctor_id.display_name or _('Unknown Doctor')

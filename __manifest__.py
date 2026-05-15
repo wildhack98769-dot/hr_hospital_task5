@@ -10,7 +10,9 @@
                 "hr",
                 ],
     "data": [
+        "security/hr_hospital_groups.xml",
         "security/ir.model.access.csv",
+        "security/hr_hospital_record_rules.xml",
         "wizard/hr_hospital_disease_report_template.xml",
         "report/hr_hospital_report_actions.xml",
         "report/hr_hospital_doctor_report_paperformat.xml",
@@ -30,6 +32,7 @@
         "views/hr_hospital_menus.xml",
     ],
     "demo": [
+        "demo/hr_hospital_users_demo.xml",
         "demo/hr_hospital_disease_demo.xml",
         "demo/hr_hospital_doctor_category_demo.xml",
         "demo/hr_hospital_doctor_demo.xml",

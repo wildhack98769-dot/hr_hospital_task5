@@ -2,6 +2,8 @@ from odoo import api, fields, models
 
 
 class VisitReportWizard(models.TransientModel):
+    """Wizard that builds a filtered list view for hospital visits."""
+
     _name = 'visit.report.wizard'
     _description = 'Visit Report Wizard'
     _rec_name = 'name'
@@ -20,6 +22,7 @@ class VisitReportWizard(models.TransientModel):
 
     @api.model
     def default_get(self, fields_list):
+        """Prefill doctors or patients when the wizard is opened from a record."""
         res = super().default_get(fields_list)
         active_model = self.env.context.get('active_model')
         active_ids = self.env.context.get('active_ids')
@@ -31,6 +34,7 @@ class VisitReportWizard(models.TransientModel):
         return res
 
     def action_generate_report(self):
+        """Open the visit list with the selected filters applied."""
         domain = []
         if self.doctor_ids:
             domain.append(('doctor_id', 'in', self.doctor_ids.ids))

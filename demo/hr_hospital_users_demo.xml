@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="demo_user_patient" model="res.users">
+            <field name="name">Patient Demo</field>
+            <field name="login">patient.demo</field>
+            <field name="email">patient.demo@example.com</field>
+            <field name="password">patient.demo</field>
+            <field name="group_ids" eval="[(4, ref('hr_hospital.group_hospital_patient'))]"/>
+        </record>
+
+        <record id="demo_user_intern" model="res.users">
+            <field name="name">Intern Demo</field>
+            <field name="login">intern.demo</field>
+            <field name="email">intern.demo@example.com</field>
+            <field name="password">intern.demo</field>
+            <field name="group_ids" eval="[(4, ref('hr_hospital.group_hospital_intern'))]"/>
+        </record>
+
+        <record id="demo_user_doctor" model="res.users">
+            <field name="name">Doctor Demo</field>
+            <field name="login">doctor.demo</field>
+            <field name="email">doctor.demo@example.com</field>
+            <field name="password">doctor.demo</field>
+            <field name="group_ids" eval="[(4, ref('hr_hospital.group_hospital_doctor'))]"/>
+        </record>
+    </data>
+</odoo>
